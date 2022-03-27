@@ -1,0 +1,9 @@
+Container contains 2 elements
+	This is two-dimensional array
+		[1, 2]
+		[3, 4]
+	Size: 2
+	This is diagonal matrix
+		[1, 2, 3, 4, 5]
+	Size: 5
+Container contains 0 elements
