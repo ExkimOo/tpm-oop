@@ -28,6 +28,12 @@ class Container:
         self.__capacity = None
         self.data = None
 
+    def write_two_dim_array_to(self, stream):
+        stream.write('Only two dimensional arrays\n')
+
+        for item in self.data:
+            item.write_two_dim_array_to(stream)
+
     def __len__(self):
         return self.size
 
@@ -60,6 +66,9 @@ class Matrix:
         matrix.read_from(stream)
         return matrix
 
+    def write_two_dim_array_to(self, stream):
+        pass
+
 
 class TwoDimArray(Matrix):
     def __init__(self):
@@ -77,6 +86,9 @@ class TwoDimArray(Matrix):
         for row in self.data:
             stream.write(f'\t\t{row}\n')
         super().write_to(stream)
+
+    def write_two_dim_array_to(self, stream):
+        self.write_to(stream)
 
 
 class Diagonal(Matrix):
