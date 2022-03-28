@@ -34,6 +34,13 @@ class Container:
     def __str__(self):
         return str(self.data)
 
+    def sort(self):
+        for i in range(self.size - 1):
+            for j in range(i + 1, self.size):
+                print(i, j)
+                if self.data[i].compare(self.data[j]):
+                    self.data[i], self.data[j] = self.data[j], self.data[i]
+
 
 class Matrix:
     def __init__(self):
@@ -61,10 +68,16 @@ class Matrix:
         return matrix
 
     def sum(self):
-        return 0
+        s = 0
+        for item in self.data:
+            if isinstance(item, int):
+                s += item
+            else:
+                s += sum(item)
+        return s
 
     def compare(self, other):
-        return self.sum() > other.sum()
+        return self.sum() < other.sum()
 
 
 class TwoDimArray(Matrix):
