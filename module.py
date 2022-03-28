@@ -53,6 +53,8 @@ class Matrix:
             matrix = TwoDimArray()
         elif k == 2:
             matrix = Diagonal()
+        elif k == 3:
+            matrix = Triangle()
         else:
             stream.close()
             raise Exception('Error type')
@@ -90,5 +92,20 @@ class Diagonal(Matrix):
 
     def write_to(self, stream):
         stream.write('\tThis is diagonal matrix\n')
+        stream.write(f'\t\t{self.data}\n')
+        super().write_to(stream)
+
+
+class Triangle(Matrix):
+    def __init__(self):
+        super().__init__()
+        self.data = []
+
+    def read_from(self, stream):
+        super().read_from(stream)
+        self.data = list(map(lambda x: int(x), stream.readline().rstrip('\n').split()))
+
+    def write_to(self, stream):
+        stream.write('\tThis is triangle matrix\n')
         stream.write(f'\t\t{self.data}\n')
         super().write_to(stream)
