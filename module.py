@@ -60,6 +60,12 @@ class Matrix:
         matrix.read_from(stream)
         return matrix
 
+    def sum(self):
+        return 0
+
+    def compare(self, other):
+        return self.sum() > other.sum()
+
 
 class TwoDimArray(Matrix):
     def __init__(self):
