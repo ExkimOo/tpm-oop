@@ -121,7 +121,7 @@ class Diagonal(Matrix):
 
     def write_to(self, stream, out_type=OutputType.one_line):
         stream.write('\tThis is diagonal matrix\n')
-        out_type = OutputType.one_line
+
         if out_type == OutputType.by_row or out_type == OutputType.by_col:
             stream.write('\t\t')
             for i in range(self.size):
