@@ -1,7 +1,24 @@
-Only two dimensional arrays
+Container contains 3 elements
+	This is triangle matrix
+		1 2 3 
+		0 4 5 
+		0 0 6 
+		Sum: 21
+		Size: 3
+		Output type: 1
+	This is diagonal matrix
+		1 0 0 0 0 
+		0 2 0 0 0 
+		0 0 3 0 0 
+		0 0 0 4 0 
+		0 0 0 0 5 
+		Sum: 15
+		Size: 5
+		Output type: 1
 	This is two-dimensional array
-		[1, 2]
-		[3, 4]
-	Sum: 10
-	Size: 2
+		1 2 
+		3 4 
+		Sum: 10
+		Size: 2
+		Output type: 1
 Container contains 0 elements
