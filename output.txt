@@ -1,8 +1,15 @@
 Container contains 2 elements
 	This is two-dimensional array
-		1 2 3 4 
+		1 2 
+		3 4 
 		Size: 2
+		Output type: 1
 	This is diagonal matrix
-		1 0 0 0 0 0 2 0 0 0 0 0 3 0 0 0 0 0 4 0 0 0 0 0 5 
+		1 0 0 0 0 
+		0 2 0 0 0 
+		0 0 3 0 0 
+		0 0 0 4 0 
+		0 0 0 0 5 
 		Size: 5
+		Output type: 1
 Container contains 0 elements

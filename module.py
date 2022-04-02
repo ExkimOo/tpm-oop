@@ -41,12 +41,15 @@ class Container:
 class Matrix:
     def __init__(self):
         self.size = 0
+        self.out_type = 0
 
     def read_from(self, stream):
         self.size = int(stream.readline().rstrip('\n'))
+        self.out_type = int(stream.readline().rstrip('\n'))
 
-    def write_to(self, stream, out_type=3):
+    def write_to(self, stream):
         stream.write(f'Size: {self.size}\n')
+        stream.write(f'\t\tOutput type: {self.out_type}\n')
 
     @staticmethod
     def create_from(stream, line):
@@ -64,12 +67,6 @@ class Matrix:
         return matrix
 
 
-class OutputType(Enum):
-    by_row = 1,
-    by_col = 2,
-    one_line = 3
-
-
 class TwoDimArray(Matrix):
     def __init__(self):
         super().__init__()
@@ -81,24 +78,24 @@ class TwoDimArray(Matrix):
             line = stream.readline().rstrip('\n')
             self.data.append(list(map(lambda x: int(x), line.split())))
 
-    def write_to(self, stream, out_type=OutputType.one_line):
+    def write_to(self, stream):
         stream.write('\tThis is two-dimensional array\n')
 
-        if out_type == OutputType.by_row:
+        if self.out_type == 1:
             stream.write('\t\t')
             for i in range(self.size):
                 for j in range(self.size):
                     stream.write(f'{self.data[i][j]} ')
                 stream.write('\n\t\t')
 
-        elif out_type == OutputType.by_col:
+        elif self.out_type == 2:
             stream.write('\t\t')
             for i in range(self.size):
                 for j in range(self.size):
                     stream.write(f'{self.data[j][i]} ')
                 stream.write('\n\t\t')
 
-        elif out_type == OutputType.one_line:
+        elif self.out_type == 3:
             stream.write('\t\t')
             for i in range(self.size):
                 for j in range(self.size):
@@ -119,17 +116,17 @@ class Diagonal(Matrix):
         super().read_from(stream)
         self.data = list(map(lambda x: int(x), stream.readline().rstrip('\n').split()))
 
-    def write_to(self, stream, out_type=OutputType.one_line):
+    def write_to(self, stream):
         stream.write('\tThis is diagonal matrix\n')
 
-        if out_type == OutputType.by_row or out_type == OutputType.by_col:
+        if self.out_type == 1 or self.out_type == 2:
             stream.write('\t\t')
             for i in range(self.size):
                 for j in range(self.size):
                     stream.write('{} '.format(self.data[i] if i == j else 0))
                 stream.write('\n\t\t')
 
-        elif out_type == OutputType.one_line:
+        elif self.out_type == 3:
             stream.write('\t\t')
             for i in range(self.size):
                 for j in range(self.size):
