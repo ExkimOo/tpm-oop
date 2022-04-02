@@ -1,0 +1,7 @@
+Only two dimensional arrays
+	This is two-dimensional array
+		[1, 2]
+		[3, 4]
+	Sum: 10
+	Size: 2
+Container contains 0 elements
