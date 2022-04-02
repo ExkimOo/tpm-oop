@@ -37,7 +37,6 @@ class Container:
     def sort(self):
         for i in range(self.size - 1):
             for j in range(i + 1, self.size):
-                print(i, j)
                 if self.data[i].compare(self.data[j]):
                     self.data[i], self.data[j] = self.data[j], self.data[i]
 
