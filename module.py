@@ -21,7 +21,7 @@ class Container:
             self.push_back(item)
 
     def write_to(self, stream):
-        stream.write(f'Container contains {self.size} elements\n')
+        stream.write(f"Container contains {self.size} elements\n")
 
         if self.data != None:
             for item in self.data:
@@ -33,7 +33,7 @@ class Container:
         self.data = None
 
     def write_two_dim_array_to(self, stream):
-        stream.write('Only two dimensional arrays\n')
+        stream.write("Only two dimensional arrays\n")
 
         for item in self.data:
             item.write_two_dim_array_to(stream)
@@ -58,25 +58,25 @@ class Matrix:
 
     def read_from(self, stream):
         try:
-            self.size = int(stream.readline().rstrip('\n'))
+            self.size = int(stream.readline().rstrip("\n"))
         except Exception:
-            print('Reading size error')
+            print("Reading size error")
             stream.close()
             sys.exit(1)
 
         try:
-            self.out_type = int(stream.readline().rstrip('\n'))
+            self.out_type = int(stream.readline().rstrip("\n"))
         except Exception:
-            print('Reading out type error')
+            print("Reading out type error")
             stream.close()
             sys.exit(1)
 
     def write_to(self, stream):
         try:
-            stream.write(f'\t\tSize: {self.size}\n')
-            stream.write(f'\t\tOutput type: {self.out_type}\n')
+            stream.write(f"\t\tSize: {self.size}\n")
+            stream.write(f"\t\tOutput type: {self.out_type}\n")
         except Exception:
-            print('Writing to file error')
+            print("Writing to file error")
             stream.close()
             sys.exit(1)
 
@@ -90,7 +90,7 @@ class Matrix:
                     s += sum(item)
             return s
         except Exception:
-            print('Sum calculation error')
+            print("Sum calculation error")
 
     def compare(self, other):
         return self.sum() < other.sum()
@@ -100,7 +100,7 @@ class Matrix:
         try:
             k = int(line)
         except Exception:
-            print('Conversion to int error')
+            print("Conversion to int error")
             stream.close()
             sys.exit(1)
 
@@ -112,7 +112,7 @@ class Matrix:
             matrix = Triangle()
         else:
             stream.close()
-            raise Exception('Error type')
+            raise Exception("Error type")
 
         matrix.read_from(stream)
         return matrix
@@ -130,43 +130,43 @@ class TwoDimArray(Matrix):
         super().read_from(stream)
         try:
             for i in range(self.size):
-                line = stream.readline().rstrip('\n')
+                line = stream.readline().rstrip("\n")
                 self.data.append(list(map(lambda x: int(x), line.split())))
         except Exception:
-            print('Reading two-dimensional array from file error')
+            print("Reading two-dimensional array from file error")
             stream.close()
             sys.exit(1)
 
     def write_to(self, stream):
         try:
-            stream.write('\tThis is two-dimensional array\n')
+            stream.write("\tThis is two-dimensional array\n")
             if self.out_type == 1:
-                stream.write('\t\t')
+                stream.write("\t\t")
                 for i in range(self.size):
                     for j in range(self.size):
-                        stream.write(f'{self.data[i][j]} ')
-                    stream.write('\n\t\t')
+                        stream.write(f"{self.data[i][j]} ")
+                    stream.write("\n\t\t")
 
             elif self.out_type == 2:
                 # stream.write('\t\t')
                 for i in range(self.size):
                     for j in range(self.size):
-                        stream.write(f'{self.data[j][i]} ')
-                    stream.write('\n\t\t')
+                        stream.write(f"{self.data[j][i]} ")
+                    stream.write("\n\t\t")
 
             elif self.out_type == 3:
                 # stream.write('\t\t')
                 for i in range(self.size):
                     for j in range(self.size):
-                        stream.write(f'{self.data[i][j]} ')
+                        stream.write(f"{self.data[i][j]} ")
                 # stream.write('\n\t\t')
             else:
-                stream.write('\tError matrix output type\n')
+                stream.write("\tError matrix output type\n")
 
-            stream.write(f'Sum: {self.sum()}\n')
+            stream.write(f"Sum: {self.sum()}\n")
             super().write_to(stream)
         except Exception:
-            print('Writing two-dimensional array to file error')
+            print("Writing two-dimensional array to file error")
             stream.close()
             sys.exit(1)
 
@@ -174,7 +174,7 @@ class TwoDimArray(Matrix):
         try:
             self.write_to(stream)
         except Exception:
-            print('Writing two-dimensional array to file error')
+            print("Writing two-dimensional array to file error")
             stream.close()
             sys.exit(1)
 
@@ -187,36 +187,38 @@ class Diagonal(Matrix):
     def read_from(self, stream):
         try:
             super().read_from(stream)
-            self.data = list(map(lambda x: int(x), stream.readline().rstrip('\n').split()))
+            self.data = list(
+                map(lambda x: int(x), stream.readline().rstrip("\n").split())
+            )
         except Exception:
-            print('Reading diagonal matrix from file error')
+            print("Reading diagonal matrix from file error")
             stream.close()
             sys.exit(1)
 
     def write_to(self, stream):
         try:
-            stream.write('\tThis is diagonal matrix\n')
+            stream.write("\tThis is diagonal matrix\n")
 
             if self.out_type == 1 or self.out_type == 2:
-                stream.write('\t\t')
+                stream.write("\t\t")
                 for i in range(self.size):
                     for j in range(self.size):
-                        stream.write('{} '.format(self.data[i] if i == j else 0))
-                    stream.write('\n\t\t')
+                        stream.write("{} ".format(self.data[i] if i == j else 0))
+                    stream.write("\n\t\t")
 
             elif self.out_type == 3:
-                stream.write('\t\t')
+                stream.write("\t\t")
                 for i in range(self.size):
                     for j in range(self.size):
-                        stream.write('{} '.format(self.data[i] if i == j else 0))
+                        stream.write("{} ".format(self.data[i] if i == j else 0))
                 # stream.write('\n\t\t')
             else:
-                stream.write('\tError matrix output type\n')
+                stream.write("\tError matrix output type\n")
 
-            stream.write(f'Sum: {self.sum()}\n')
+            stream.write(f"Sum: {self.sum()}\n")
             super().write_to(stream)
         except Exception:
-            print('Writing diagonal matrix to file error')
+            print("Writing diagonal matrix to file error")
             stream.close()
             sys.exit(1)
 
@@ -229,40 +231,42 @@ class Triangle(Matrix):
     def read_from(self, stream):
         try:
             super().read_from(stream)
-            self.data = list(map(lambda x: int(x), stream.readline().rstrip('\n').split()))
+            self.data = list(
+                map(lambda x: int(x), stream.readline().rstrip("\n").split())
+            )
         except Exception:
-            print('Reading triangle matrix from file error')
+            print("Reading triangle matrix from file error")
             stream.close()
             sys.exit(1)
 
     def write_to(self, stream):
         try:
-            stream.write('\tThis is triangle matrix\n')
+            stream.write("\tThis is triangle matrix\n")
 
             if self.out_type == 1 or self.out_type == 2:
-                stream.write('\t\t')
+                stream.write("\t\t")
                 index = 0
                 for i in range(self.size):
                     for j in range(self.size):
                         if j >= i:
-                            stream.write(str(self.data[index]) + ' ')
+                            stream.write(str(self.data[index]) + " ")
                             index += 1
                         else:
-                            stream.write('0 ')
-                    stream.write('\n\t\t')
+                            stream.write("0 ")
+                    stream.write("\n\t\t")
 
             elif self.out_type == 3:
-                stream.write('\t\t')
+                stream.write("\t\t")
                 for i in range(self.size):
                     for j in range(self.size):
-                        stream.write('{} '.format(self.data[i] if i == j else 0))
+                        stream.write("{} ".format(self.data[i] if i == j else 0))
                 # stream.write('\n\t\t')
             else:
-                stream.write('\tError matrix output type\n')
+                stream.write("\tError matrix output type\n")
 
-            stream.write(f'Sum: {self.sum()}\n')
+            stream.write(f"Sum: {self.sum()}\n")
             super().write_to(stream)
         except Exception:
-            print('Writing triangle matrix to file error')
+            print("Writing triangle matrix to file error")
             stream.close()
             sys.exit(1)
