@@ -50,6 +50,17 @@ class Container:
                 if self.data[i].compare(self.data[j]):
                     self.data[i], self.data[j] = self.data[j], self.data[i]
 
+    def __iter__(self):
+        return self.data
+
+    def check_matrices(self):
+        matrices_1 = [item for item in self.data]
+        matrices_2 = matrices_1.copy()
+
+        for matrix_1 in matrices_1:
+            for matrix_2 in matrices_2:
+                Matrix.check_matrices(matrix_1, matrix_2)
+
 
 class Matrix:
     def __init__(self):
@@ -119,6 +130,43 @@ class Matrix:
 
     def write_two_dim_array_to(self, stream):
         pass
+
+    @staticmethod
+    def check_matrices(matrix_1, matrix_2):
+        match matrix_1, matrix_2:
+            case TwoDimArray(), TwoDimArray():
+                print("Matrices are the same type: TwoDimArray and TwoDimArray")
+
+            case TwoDimArray(), Diagonal():
+                print("Matrices are different type: TwoDimArray and Diagonal")
+
+            case TwoDimArray(), Triangle():
+                print("Matrices are different type: TwoDimArray and Triangle")
+
+            case Diagonal(), TwoDimArray():
+                print("Matrices are different type: Diagonal and TwoDimArray")
+
+            case Diagonal(), Diagonal():
+                print("Matrices are the same type: Diagonal and Diagonal")
+
+            case Diagonal(), Triangle():
+                print("Matrices are different type: Diagonal and Triangle")
+
+            case Triangle(), TwoDimArray():
+                print("Matrices are different type: Triangle and TwoDimArray")
+
+            case Triangle(), Diagonal():
+                print("Matrices are different type: Triangle and Diagonal")
+
+            case Triangle(), Triangle():
+                print("Matrices are the same type: Triangle and TwoDimArray")
+
+            case _:
+                print('Unknown type')
+                return
+
+        print(f"First: {matrix_1}, second: {matrix_2}")
+        print()
 
 
 class TwoDimArray(Matrix):
