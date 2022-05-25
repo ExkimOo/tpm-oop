@@ -16,6 +16,7 @@ def main():
             container.read_from(input_file)
     except (OSError, FileNotFoundError):
         print(f"Can't open file {sys.argv[1]}")
+        sys.exit(1)
 
     print("Filled container")
 
@@ -31,6 +32,7 @@ def main():
             container.write_to(output_file)
     except OSError:
         print(f"Can't write to file {sys.argv[2]}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
